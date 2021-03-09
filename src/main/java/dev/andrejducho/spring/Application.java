@@ -11,12 +11,15 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//all config beans and properties will be in appconfig class
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		//name in getBean is component default name, it can be specified like @Component("myGreatCar")
-		Car usedCar = context.getBean("fastCar", Car.class);
+		//name in getBean is bean ID from appconfig
+		Car usedCar = context.getBean("usedCar", Car.class);
 
 		System.out.println(usedCar.thisCarIs());
+
+		//System.out.println(usedCar.);
 
 		System.out.println(usedCar.getRightTires());
 		context.close();

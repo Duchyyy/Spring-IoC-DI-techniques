@@ -1,22 +1,18 @@
 package dev.andrejducho.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
-@Component
 public class SlowCar implements Car{
 
     private String brand;
     private String owner;
+    @Value("${name.plateNumber}")       //inject value from application.properties
     private String plateNumber;
 
-    @Autowired
-    @Qualifier("winterTiresService")
     private TiresService tiresService;
 
-    public SlowCar() {
-
+    public SlowCar(TiresService tiresService) {
+        this.tiresService = tiresService;
     }
 
     @Override
@@ -26,6 +22,7 @@ public class SlowCar implements Car{
 
     @Override
     public String getRightTires() {
+        System.out.println(getPlateNumber());
         return tiresService.usedTires();
     }
 
@@ -36,7 +33,20 @@ public class SlowCar implements Car{
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
     }
 }
