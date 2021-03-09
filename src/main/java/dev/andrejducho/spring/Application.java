@@ -13,7 +13,8 @@ public class Application {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-		Car usedCar = context.getBean("myCar", Car.class);
+		//name in getBean is component default name, it can be specified like @Component("myGreatCar")
+		Car usedCar = context.getBean("fastCar", Car.class);
 
 		System.out.println(usedCar.thisCarIs());
 

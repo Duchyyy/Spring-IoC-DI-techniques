@@ -7,33 +7,14 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- inject values from properties file and use this in bean: <property name="plateNumber" value="${name.plateNumber}"/> -->
-    <context:property-placeholder location="classpath:application.properties" />
+    <!-- enable scan component  -->
+    <context:component-scan base-package="dev.andrejducho.spring"/>
 
-    <!-- define dependency -->
-    <bean id="winterTiresService"
-          class="dev.andrejducho.spring.WinterTiresService">
-    </bean>
-
-    <!-- define bean, change implementation here with like FastCar for SlowCar -->
-    <bean id="myCar"
-          class="dev.andrejducho.spring.FastCar">
-
-        <!-- constructor injection, constructor must be prepared in class -->
-        <constructor-arg ref="winterTiresService" />
-
-        <!-- setter injection, setter must be prepared in class
-        <property name="tiresService" ref="myTiresService" />    -->
-
-
-
-
-        <!-- injection literal values -->
-        <property name="brand" value="BMW"/>
-        <property name="owner" value="Peter"/>
-        <!-- inject value from properties file -->
-        <property name="plateNumber" value="${name.plateNumber}"/>
-
-    </bean>
+    <!--
+      with @Component we register bean
+      and @Autowired in constructor, setter, method connect to
+       probably first implementation of interface, so if we have multiple implementation
+       use @Autowired field with qualifier with implementation string @Qualifier("summerTiresService")
+      -->
 
 </beans>

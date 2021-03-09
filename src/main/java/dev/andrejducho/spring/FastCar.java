@@ -1,15 +1,21 @@
 package dev.andrejducho.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class FastCar implements Car{
 
     private String brand;
     private String owner;
     private String plateNumber;
 
+    @Autowired
+    @Qualifier("summerTiresService")
     private TiresService tiresService;
 
-    public FastCar(TiresService tiresService) {
-        this.tiresService = tiresService;
+    public FastCar() {
     }
 
     @Override
