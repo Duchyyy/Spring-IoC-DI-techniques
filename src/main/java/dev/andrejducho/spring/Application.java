@@ -11,6 +11,15 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+		Car usedCar = context.getBean("myCar", Car.class);
+
+		System.out.println(usedCar.thisCarIs());
+
+		System.out.println(usedCar.getRightTires());
+		context.close();
+
 	}
 
 }
